@@ -1,5 +1,12 @@
 package com.catherine.latte_core.net.callback;
 
+import android.os.Handler;
+import android.util.Log;
+
+import com.catherine.latte_core.ui.LatteLoader;
+import com.catherine.latte_core.ui.LoadingStyle;
+
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -9,12 +16,15 @@ public class RequestCallbacks implements Callback<String> {
     private final ISuccess SUCCESS;
     private final IError ERROR;
     private final IFailure FAILURE;
+    private final LoadingStyle LOADER_STYLE;
+    private static final Handler HANDLER = new Handler();//static避免异步内存泄漏
 
-    public RequestCallbacks(IRequest request, ISuccess success, IError error, IFailure failure) {
+    public RequestCallbacks(IRequest request, ISuccess success, IError error, IFailure failure, LoadingStyle loadingStyle) {
         this.REQUEST = request;
         this.SUCCESS = success;
         this.ERROR = error;
         this.FAILURE = failure;
+        this.LOADER_STYLE = loadingStyle;
     }
 
     @Override
@@ -27,9 +37,22 @@ public class RequestCallbacks implements Callback<String> {
             }
         } else {
             if (ERROR != null) {
-                ERROR.onError(response.code(),response.message());
+                ERROR.onError(response.code(), response.message());
             }
         }
+
+        if (LOADER_STYLE != null) {
+            stopLoading();
+        }
+    }
+
+    private void stopLoading() {
+        HANDLER.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LatteLoader.stopLoading();
+            }
+        }, 1000);
     }
 
     @Override
@@ -40,5 +63,9 @@ public class RequestCallbacks implements Callback<String> {
         if (REQUEST != null) {
             REQUEST.onRequestEnd();
         }
+        if (LOADER_STYLE != null) {
+            stopLoading();
+        }
+        Log.e("onFailure", t.getMessage());
     }
 }
