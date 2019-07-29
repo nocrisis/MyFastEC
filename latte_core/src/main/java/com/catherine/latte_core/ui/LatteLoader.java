@@ -40,7 +40,7 @@ public class LatteLoader {
         dialog.show();
     }
 //防止传入applicationContext，此时向webView跳转时会出错，应该Fragment getActivity()，Activity .this
-    private static void showLoading(Context context) {
+    public static void showLoading(Context context) {
         showLoading(context, DEFAULT_LOADER);
     }
     public static void stopLoading(){

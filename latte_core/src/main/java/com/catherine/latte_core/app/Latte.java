@@ -2,19 +2,18 @@ package com.catherine.latte_core.app;
 
 import android.content.Context;
 
-import java.util.WeakHashMap;
-
 public final class Latte {
-public static Configurator init (Context context) {
-    getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
-    return Configurator.getInstance();
-}
-public static WeakHashMap<String,Object> getConfigurations(){
-    return Configurator.getInstance().getLatteConfigs();
-}
+    public static Configurator init(Context context) {
+        Configurator.getInstance().getLatteConfigs().put(ConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
+        return Configurator.getInstance();
+    }
 
-public static Context getApplicationContext(){
-    return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
-}
+    public static <T> T getConfiguration(Object key) {
+        return Configurator.getInstance().getConfiguration(key);
+    }
+
+    public static Context getApplicationContext() {
+        return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
+    }
 
 }
