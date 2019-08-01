@@ -1,5 +1,6 @@
 package launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,6 +9,8 @@ import androidx.annotation.Nullable;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.catherine.latte.ec.R;
+import com.catherine.latte_core.app.AccountManager;
+import com.catherine.latte_core.app.IUserChecker;
 import com.catherine.latte_core.delegate.LatteDelegate;
 import com.catherine.latte_core.ui.launcher.LauncherHolderCreator;
 import com.catherine.latte_core.ui.launcher.ScrollLauncherTag;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 public class LauncherScrollDelegate extends LatteDelegate implements OnItemClickListener {
     private ConvenientBanner<Integer> mBanner = null;
     private static final ArrayList<Integer> INTEGERS = new ArrayList<>();
+    private ILauncherListener mILauncherListener;
 
     private void initBanner() {
         //必须清空，虽然这里有new ArrayList,但是SingleTask模式不会创新创建FragmentActivity，只是再次运行onCreateView
@@ -55,6 +59,27 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
         if (position == INTEGERS.size() - 1) {
             LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
             //检查用户是否已经登录
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
         }
     }
 

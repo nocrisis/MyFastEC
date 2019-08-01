@@ -1,5 +1,6 @@
 package launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +10,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.catherine.latte.ec.R;
 import com.catherine.latte.ec.R2;
+import com.catherine.latte_core.app.AccountManager;
+import com.catherine.latte_core.app.IUserChecker;
 import com.catherine.latte_core.delegate.LatteDelegate;
 import com.catherine.latte_core.ui.launcher.ScrollLauncherTag;
 import com.catherine.latte_core.util.storage.LattePreference;
@@ -27,7 +30,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
     private Timer mTimer;
     private int mCount = 5;
-
+    private ILauncherListener mILauncherListener;
     @OnClick(R2.id.tv_launcher_timer)
     void OnClickTimeView() {
         //点击跳过广告
@@ -49,7 +52,19 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
             start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否已经登录APP
-            Toast.makeText(getContext(), "检查用户是否已经登录APP", Toast.LENGTH_LONG);
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                }
+            });
         }
     }
     @Override
@@ -71,6 +86,14 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
                 }
             }
         });
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
     }
 
     @Override

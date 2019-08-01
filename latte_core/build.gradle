@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'androidx.appcompat:appcompat:1.0.0'
+    api 'com.google.android.material:material:1.0.0'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
     //Fragmentation
     api 'me.yokeyword:fragmentation:1.2.7'
     api 'me.yokeyword:fragmentation-swipeback:1.2.7'
@@ -48,6 +50,14 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.0.0'
     //json依赖
     api 'com.alibaba:fastjson:1.2.5'
+    //log不同等级屏蔽
+    api 'com.orhanobut:logger:1.15'
+    //持久化
+    api 'org.greenrobot:greendao-generator:3.2.2'
+    api 'org.greenrobot:greendao:3.2.2'
+    //stetho调试
+    api 'com.facebook.stetho:stetho:1.5.1'
+    api'com.facebook.stetho:stetho-okhttp3:1.5.1'
     api project(path: ':latte_annotations')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
