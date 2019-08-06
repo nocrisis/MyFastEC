@@ -32,8 +32,8 @@ dependencies {
     api 'me.yokeyword:fragmentation:1.2.7'
     api 'me.yokeyword:fragmentation-swipeback:1.2.7'
     //ButterKnife
-    api 'com.jakewharton:butterknife:10.1.0'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    api 'com.jakewharton:butterknife:10.0.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     //网络请求依赖
     api 'com.squareup.okio:okio:2.2.0'
     api 'com.squareup.okhttp3:okhttp:3.12.3'
@@ -55,9 +55,11 @@ dependencies {
     //持久化
     api 'org.greenrobot:greendao-generator:3.2.2'
     api 'org.greenrobot:greendao:3.2.2'
-    //stetho调试
-    api 'com.facebook.stetho:stetho:1.5.1'
-    api'com.facebook.stetho:stetho-okhttp3:1.5.1'
+    //stetho调试(模仿f12，然而被墙)
+    /*api 'com.facebook.stetho:stetho:1.5.1'
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.1'*/
+    //tencent api带统计
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     api project(path: ':latte_annotations')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

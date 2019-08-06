@@ -96,7 +96,7 @@
                 android:textSize="16sp"
                 tools:ingore="HardcodedText" />
             <ImageView
-                android:id="@+id/img_wechat"
+                android:id="@+id/img_sign_in_wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"

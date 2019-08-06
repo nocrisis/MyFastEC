@@ -14,6 +14,8 @@ import com.catherine.latte_core.delegate.LatteDelegate;
 import com.catherine.latte_core.net.RestClient;
 import com.catherine.latte_core.net.callback.ISuccess;
 import com.catherine.latte_core.util.log.LatteLogger;
+import com.catherine.latte_core.wechat.LatteWeChat;
+import com.catherine.latte_core.wechat.callbacks.IWeChatSignInCallback;
 import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
@@ -44,7 +46,7 @@ public class SignInDelegate extends LatteDelegate {
     }
 
     @OnClick(R2.id.btn_sign_in)
-    void onClickSignUp() {
+    void onClickSignIn() {
         if (checkForm()) {
             RestClient.builder().url("https://www.easy-mock.com/mock/5d423b5993d2407e9ef5afc7/user_profile")
                     .params("mail",mMail.getText().toString())
@@ -58,6 +60,21 @@ public class SignInDelegate extends LatteDelegate {
             }).build().post();
             Toast.makeText(getContext(), "验证通过", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @OnClick(R2.id.img_sign_in_wechat)
+    void onClickSignInWeChat() {
+        LatteWeChat.getInstance().onSignInSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+
+            }
+        }).signIn();
+    }
+
+    @OnClick(R2.id.tv_link_sign_in)
+    void onClickLink() {
+        start(new SignUpDelegate());
     }
 
     private boolean checkForm() {

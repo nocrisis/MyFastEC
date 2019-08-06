@@ -1,5 +1,7 @@
 package com.catherine.latte_core.app;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
@@ -32,6 +34,21 @@ public class Configurator {
 
     public final Configurator withApiHost(String host) {
         LATTE_CONFIGS.put(ConfigKeys.API_HOST, host);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity) {
+        LATTE_CONFIGS.put(ConfigKeys.ACTIVITY, activity);
+        return this;
+    }
+
+    public final Configurator withAppId(String appId) {
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID, appId);
+        return this;
+    }
+
+    public final Configurator withAppSecret(String appSecret) {
+        LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET, appSecret);
         return this;
     }
 

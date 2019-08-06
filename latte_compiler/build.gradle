@@ -2,6 +2,11 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.google.auto.service:auto-service:1.0-rc4'
+    api 'com.google.auto:auto-common:0.10'
+    api 'com.squareup:javapoet:1.10.0'
+    api project(path: ':latte_annotations')
+
 }
 
 sourceCompatibility = "7"
