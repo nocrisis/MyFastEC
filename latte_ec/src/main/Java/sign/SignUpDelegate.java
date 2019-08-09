@@ -51,7 +51,7 @@ public class SignUpDelegate extends LatteDelegate {
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp() {
         if (checkForm()) {
-            RestClient.builder().url("https://www.easy-mock.com/mock/5d423b5993d2407e9ef5afc7/user_profile")
+            RestClient.builder().url("user_profile")
                     .params("name",mName.getText().toString())
                     .params("mail",mMail.getText().toString())
                     .params("phone",mPhone.getText().toString())

@@ -1,6 +1,10 @@
 package com.catherine.latte_core.app;
 
 import android.app.Activity;
+import android.os.Handler;
+
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
 
 import java.util.ArrayList;
 import java.util.WeakHashMap;
@@ -10,9 +14,12 @@ import okhttp3.Interceptor;
 public class Configurator {
     private static final WeakHashMap<Object, Object> LATTE_CONFIGS = new WeakHashMap<>();
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
+        LATTE_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
     }
 
     public static Configurator getInstance() {
@@ -25,6 +32,7 @@ public class Configurator {
     }
 
     public final void configure() {
+        initIcons();
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
@@ -49,6 +57,20 @@ public class Configurator {
 
     public final Configurator withAppSecret(String appSecret) {
         LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET, appSecret);
+        return this;
+    }
+
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
+    }
+
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
         return this;
     }
 

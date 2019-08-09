@@ -9,7 +9,10 @@ import androidx.appcompat.widget.ContentFrameLayout;
 import com.catherine.latte_core.R;
 import com.catherine.latte_core.delegate.LatteDelegate;
 
+import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportActivityDelegate;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public abstract class ProxyActivity extends SupportActivity {
 

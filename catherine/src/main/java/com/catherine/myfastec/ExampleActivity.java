@@ -14,6 +14,7 @@ import com.catherine.latte_core.delegate.LatteDelegate;
 import launcher.ILauncherListener;
 import launcher.LauncherDelegate;
 import launcher.OnLauncherFinishTag;
+import main.EcBottomDelegate;
 import sign.ISignListener;
 import sign.SignInDelegate;
 import sign.SignUpDelegate;
@@ -52,7 +53,7 @@ public class ExampleActivity extends ProxyActivity implements
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                startWithPop(new ExampleDelegate());
+                startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
