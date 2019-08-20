@@ -61,6 +61,7 @@ public final class PagingBean {
         return this;
     }
 
+    //第一次加载第一页时，告诉我们现在的pageIndex已经加一了
     PagingBean addIndex() {
         mPageIndex++;
         return this;

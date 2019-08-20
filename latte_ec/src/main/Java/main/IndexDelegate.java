@@ -19,6 +19,7 @@ import com.catherine.latte.ec.R;
 import com.catherine.latte.ec.R2;
 import com.catherine.latte_core.delegate.bottom.BottomItemDelegate;
 import com.catherine.latte_core.ui.recycler.BaseDecoration;
+import com.catherine.latte_core.ui.recycler.IndexDataConverter;
 import com.catherine.latte_core.ui.refresh.RefreshHandler;
 import com.catherine.latte_core.util.callback.CallbackManager;
 import com.catherine.latte_core.util.callback.CallbackType;
@@ -53,16 +54,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-//        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        /*CallbackManager.getInstance()
-                .addCallback(CallbackType.ON_SCAN, new IGlobalCallback<String>() {
-                    @Override
-                    public void executeCallback(@Nullable String args) {
-                        Toast.makeText(getContext(), "得到的二维码是" + args, Toast.LENGTH_LONG).show();
-                    }
-                });
-        mSearchView.setOnFocusChangeListener(this);*/
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
     }
 
     private void initRefreshLayout() {
@@ -75,6 +67,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
     }
 
     private void initRecyclerView() {
+        //一行最多四个
         final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
@@ -87,7 +80,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
-        //initRecyclerView();
+        initRecyclerView();
         mRefreshHandler.firstPage("index_data");
     }
 

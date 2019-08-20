@@ -1,7 +1,5 @@
 package com.catherine.latte_core.ui.recycler;
 
-
-
 import androidx.annotation.ColorInt;
 
 import com.choices.divider.DividerItemDecoration;

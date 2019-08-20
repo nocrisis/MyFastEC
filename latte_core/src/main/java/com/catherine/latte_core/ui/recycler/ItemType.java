@@ -1,4 +1,4 @@
-package main;
+package com.catherine.latte_core.ui.recycler;
 
 
 public class ItemType {
