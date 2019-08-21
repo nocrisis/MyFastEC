@@ -67,10 +67,17 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        //每个fragment items 的icon和title bind view和listener
         final int size = ITEMS.size();
         for (int i = 0; i < size; i++) {
+            //LayoutInflater.from(this).inflate(layoutId, root, boolean);
+            /*1. 如果root为null，attachToRoot将失去作用，设置任何值都没有意义。
+            2. 如果root不为null，attachToRoot设为true，则会给加载的布局文件的指定一个父布局，即root。
+            3. 如果root不为null，attachToRoot设为false，则会将布局文件最外层的所有layout属性进行设置，当该view被添加到父view当中时，这些layout属性会自动生效。
+            4. 在不设置attachToRoot参数的情况下，如果root不为null，attachToRoot参数默认为true。*/
+            //(2)bottom_item_icon_text_layout 父布局root 为 mBottomBar(delegate_bottom)
             LayoutInflater.from(getContext()).inflate(R.layout.bottom_item_icon_text_layout, mBottomBar);
-            //多个bottom_item_icon_text_layout(item)镶嵌在delegate_bottom的bottom_bar中
+            //多个bottom_item_icon_text_layout(item)按for循环依次镶嵌在（attachToRoot）delegate_bottom的bottom_bar中
             final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(i);
             //设置每个item的点击事件
             item.setTag(i);
@@ -86,7 +93,9 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
                 itemTitle.setTextColor(mClickedColor);
             }
         }
+
         final ISupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
+        //bottom上面切换Fragment部分的container，要显示的fragment的序号（默认0），，fragment有序集合
         loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArray);
 
     }

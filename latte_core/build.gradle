@@ -52,7 +52,7 @@ dependencies {
     //json依赖
     api 'com.alibaba:fastjson:1.2.5'
     //log不同等级屏蔽
-    api 'com.orhanobut:logger:1.15'
+    api 'com.orhanobut:logger:2.2.0'
     //持久化
     api 'org.greenrobot:greendao-generator:3.2.2'
     api 'org.greenrobot:greendao:3.2.2'
@@ -75,7 +75,11 @@ dependencies {
     // 使用provide可以避免支持包版本冲突和重复打包导致安装包体积徒增
     compileOnly 'com.google.auto.value:auto-value:1.5.3'
     annotationProcessor 'com.google.auto.value:auto-value:1.5.3'
-
+    //沉浸式状态栏
+    api('com.github.niorgai:StatusBarCompat:2.3.3', {
+        exclude group: 'androidx.appcompat:appcompat'
+        exclude group: 'com.google.android.material:material'
+    })
     api project(path: ':latte_annotations')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

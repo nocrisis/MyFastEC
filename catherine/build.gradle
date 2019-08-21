@@ -9,6 +9,8 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -26,6 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(path: ':latte_ec')
+    api 'com.android.support:multidex:1.0.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     annotationProcessor project(path: ':latte_compiler')
 }

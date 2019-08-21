@@ -7,6 +7,9 @@ import com.catherine.latte_core.delegate.bottom.ItemBuilder;
 
 import java.util.LinkedHashMap;
 
+import main.index.IndexDelegate;
+import main.sort.SortDelegate;
+
 public class EcBottomDelegate extends BaseBottomDelegate {
     @Override
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {

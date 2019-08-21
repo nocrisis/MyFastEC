@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--android.support.design.widget.CoordinatorLayout-->
-<com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_index"
@@ -18,12 +19,13 @@
             android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_index"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@android:color/transparent"
-        app:layout_behavior="main.TranslucentBehavior">
+        app:layout_behavior="main.index.TranslucentBehavior">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -66,7 +68,6 @@
                 android:textSize="25sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
     </androidx.appcompat.widget.Toolbar>
 
-</com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

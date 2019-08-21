@@ -1,13 +1,12 @@
-package main;
+package main.index;
 
 import android.view.View;
 
 import com.catherine.latte_core.delegate.LatteDelegate;
-import com.catherine.latte_core.ui.recycler.MultipleFields;
-import com.catherine.latte_core.ui.recycler.MultipleItemEntity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 
+import detail.GoodsDetailDelegate;
 
 
 public class IndexItemClickListener extends SimpleClickListener {
@@ -26,8 +25,8 @@ public class IndexItemClickListener extends SimpleClickListener {
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //        final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
 //        final int goodsId = entity.getField(MultipleFields.ID);
-//        final GoodsDetailDelegate delegate = GoodsDetailDelegate.create(goodsId);
-//        DELEGATE.start(delegate);
+        final GoodsDetailDelegate delegate = GoodsDetailDelegate.create();
+        DELEGATE.start(delegate);
     }
 
     @Override

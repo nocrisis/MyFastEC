@@ -14,6 +14,7 @@ import com.catherine.latte_core.net.callback.IFailure;
 import com.catherine.latte_core.net.callback.ISuccess;
 import com.catherine.latte_core.ui.recycler.DataConverter;
 import com.catherine.latte_core.ui.recycler.MultipleRecyclerAdapter;
+import com.catherine.latte_core.util.log.LatteLogger;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -80,14 +81,14 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener
                 .failure(new IFailure() {
                     @Override
                     public void onFailure() {
-                        Logger.d("获取index数据失败");
+                        LatteLogger.d("获取index数据失败");
                         Toast.makeText(Latte.getApplicationContext(), "获取index数据失败", Toast.LENGTH_LONG).show();
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        Logger.d("获取index数据错误:" + msg);
+                        LatteLogger.d("获取index数据错误:" + msg);
                         Toast.makeText(Latte.getApplicationContext(), "获取index数据错误:" + msg, Toast.LENGTH_LONG).show();
 
                     }

@@ -1,9 +1,8 @@
-package main;
+package main.index;
 
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -21,13 +20,10 @@ import com.catherine.latte_core.delegate.bottom.BottomItemDelegate;
 import com.catherine.latte_core.ui.recycler.BaseDecoration;
 import com.catherine.latte_core.ui.recycler.IndexDataConverter;
 import com.catherine.latte_core.ui.refresh.RefreshHandler;
-import com.catherine.latte_core.util.callback.CallbackManager;
-import com.catherine.latte_core.util.callback.CallbackType;
-import com.catherine.latte_core.util.callback.IGlobalCallback;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import main.EcBottomDelegate;
 
 
 public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
@@ -58,6 +54,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
     }
 
     private void initRefreshLayout() {
+        //设置下拉刷新进度条渐变颜色
         mRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_orange_light,
@@ -70,9 +67,11 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
         //一行最多四个
         final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.addItemDecoration
+        mRecyclerView.addItemDecoration//浅灰色，宽度为5的分割线
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        //点击监听时传入EcBottomDelegate，即在父布局上监听替换，否则如果传入this,bottomDelegate没有被替换
+        //create在该view上产生SimpleClickListener
         mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
     }
 

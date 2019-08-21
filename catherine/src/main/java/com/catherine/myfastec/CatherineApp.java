@@ -2,6 +2,8 @@ package com.catherine.myfastec;
 
 import android.app.Application;
 
+import androidx.multidex.MultiDex;
+
 import com.catherine.latte_core.app.Latte;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -12,6 +14,7 @@ public class CatherineApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         Latte.init(this)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())

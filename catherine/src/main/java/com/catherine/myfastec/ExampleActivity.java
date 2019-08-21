@@ -15,6 +15,7 @@ import launcher.ILauncherListener;
 import launcher.LauncherDelegate;
 import launcher.OnLauncherFinishTag;
 import main.EcBottomDelegate;
+import qiu.niorgai.StatusBarCompat;
 import sign.ISignListener;
 import sign.SignInDelegate;
 import sign.SignUpDelegate;
@@ -36,6 +37,7 @@ public class ExampleActivity extends ProxyActivity implements
             actionBar.hide();
         }
         Latte.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override

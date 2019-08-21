@@ -10,8 +10,10 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.catherine.latte_core.R;
 import com.catherine.latte_core.ui.banner.BannerCreator;
+import com.catherine.latte_core.ui.image.GlideApp;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
@@ -25,6 +27,11 @@ public class MultipleRecyclerAdapter extends
         OnItemClickListener {
     //确保值加载一次banner,防止每次滑动上来，滑动下去重复加载
     private boolean mIsInitBanner = false;
+
+    private static final RequestOptions RECYCLER_OPTIONS =
+            new RequestOptions().centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate();
 
     protected MultipleRecyclerAdapter(List<MultipleItemEntity> data) {
         super(data);
@@ -70,12 +77,15 @@ public class MultipleRecyclerAdapter extends
                 break;
             case ItemType.IMAGE:
                 imgUrl = entity.getField(MultipleFields.IMAGE_URL);
-                Glide.with(mContext)
+                Glide.with(mContext).load(imgUrl).apply(RECYCLER_OPTIONS)
+                        .into((AppCompatImageView) holder.getView(R.id.img_single));
+                /*Glide.with(mContext)
                         .load(imgUrl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .dontAnimate()
                         .centerCrop()
-                        .into((AppCompatImageView) holder.getView(R.id.img_single));
+                        .into((AppCompatImageView) holder.getView(R.id.img_single));*/
+//                GlideApp.with()
                 break;
             case ItemType.TEXT_IMAGE:
                 text = entity.getField(MultipleFields.TEXT);
@@ -83,9 +93,7 @@ public class MultipleRecyclerAdapter extends
                 imgUrl = entity.getField(MultipleFields.IMAGE_URL);
                 Glide.with(mContext)
                         .load(imgUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .dontAnimate()
-                        .centerCrop()
+                        .apply(RECYCLER_OPTIONS)
                         .into((AppCompatImageView) holder.getView(R.id.img_multiple));
                 //默认使用原缓存
                 break;
