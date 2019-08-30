@@ -59,7 +59,7 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Logger.d(response);
+                        LatteLogger.d(response);
                        /* final IndexDataConverter converter = new IndexDataConverter();
                         converter.setJsonData(response);
                         final ArrayList<MultipleItemEntity> list = converter.convert();

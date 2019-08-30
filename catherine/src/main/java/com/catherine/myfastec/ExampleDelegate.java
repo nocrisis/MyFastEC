@@ -18,6 +18,7 @@ import com.catherine.latte_core.ui.LatteLoader;
 
 import java.util.WeakHashMap;
 
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,16 +38,17 @@ public class ExampleDelegate extends LatteDelegate {
         OnCallRxClientGet();
     }
 
+    @OnClick(R2.id.send)
     public void testRestClient() {
         Toast.makeText(getContext(), "发送信息", Toast.LENGTH_LONG).show();
         WeakHashMap<String, Object> params = new WeakHashMap<>();
-        /*params.put("Code", "login");
+        params.put("Code", "login");
         params.put("Username", "admin");
-        params.put("Password", "xsjl2012");*/
+        params.put("Password", "xsjl2012");
         RestClient.builder()
-//                .url("ashx/data/login.ashx")
-//                .params(params)
-                .url("http://127.0.0.1/index")
+                .url("ashx/data/login.ashx")
+                .params(params)
+//                .url("http://127.0.0.1/index")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
@@ -107,7 +109,8 @@ public class ExampleDelegate extends LatteDelegate {
                     }
                 });
     }
-//不用自己创建CallBack，以及OnRequest的loading，observable有足够各个过程的api
+
+    //不用自己创建CallBack，以及OnRequest的loading，observable有足够各个过程的api
     public void OnCallRxClientGet() {
         final String url = "ashx/data/login.ashx";
         final WeakHashMap<String, Object> params = new WeakHashMap<>();

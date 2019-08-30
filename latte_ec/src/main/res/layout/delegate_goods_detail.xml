@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<androidx.appcompat.widget.AppCompatTextView
-    android:text="商品详细"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品详细" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

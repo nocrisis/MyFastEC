@@ -95,6 +95,30 @@ public class RestClient {
                 final MultipartBody.Part body = MultipartBody.Part
                         .createFormData("file", FILE.getName(), requestBody);
                 call = RestCreator.getRestService().upload(URL, body);
+            case UPLOAD_PARAM:
+                MultipartBody.Builder builder = new MultipartBody.Builder();
+                for (Map.Entry<String, Object> entry : PARAMS.entrySet()) {
+                    String key = entry.getKey();
+                    String value = null;
+                    //空值处理
+                    if (entry.getValue() == null) {
+                        value = "";
+                    } else {
+                        value = entry.getValue().toString();
+                    }
+                    builder.addFormDataPart(key, value);
+                }
+                final RequestBody fileBody = RequestBody.create(MediaType.parse(
+                        MultipartBody.FORM.toString()), FILE);
+//此方法报错 final MultipartBody multipartBody = builder.addFormDataPart("file", FILE.getName(), fileBody).build();
+                final MultipartBody.Part part = MultipartBody.Part
+                        .createFormData("file", FILE.getName(), fileBody);
+                MultipartBody multipartBody = builder
+                        .addPart(part)
+                        .setType(MultipartBody.FORM)
+                        .build();
+                call = RestCreator.getRestService().uploadParam(URL, multipartBody);
+                break;
             default:
                 break;
         }
@@ -135,6 +159,14 @@ public class RestClient {
             }
             request(HttpMethod.PUT_RAW);
         }
+    }
+
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void uploadParam() {
+        request(HttpMethod.UPLOAD_PARAM);
     }
 
     public final void download() {

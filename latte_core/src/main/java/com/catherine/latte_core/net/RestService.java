@@ -21,29 +21,34 @@ import retrofit2.http.Url;
 
 public interface RestService {
     @GET
-    Call<String> get(@Url String url, @QueryMap Map<String,Object> params);
+    Call<String> get(@Url String url, @QueryMap Map<String, Object> params);
 
     @FormUrlEncoded
     @POST
-    Call<String>post(@Url String url, @FieldMap Map<String,Object> params);
+    Call<String> post(@Url String url, @FieldMap Map<String, Object> params);
 
     @POST
     Call<String> postRaw(@Url String url, @Body RequestBody body);
 
     @FormUrlEncoded
     @PUT
-    Call<String>put(@Url String url, @FieldMap Map<String,Object> params);
+    Call<String> put(@Url String url, @FieldMap Map<String, Object> params);
 
     @PUT
     Call<String> putRaw(@Url String url, @Body RequestBody body);
+
     @DELETE
-    Call<String> delete(@Url String url, @QueryMap Map<String,Object> params);
+    Call<String> delete(@Url String url, @QueryMap Map<String, Object> params);
 
     @Streaming//边下载，边从内存写入文件，以免内存溢出
-    @GET//放在另外一个线程下载，在主线程进行IO操作会报错
-    Call<ResponseBody> download(@Url String url, @QueryMap Map<String,Object> params);
+    @GET
+//放在另外一个线程下载，在主线程进行IO操作会报错
+    Call<ResponseBody> download(@Url String url, @QueryMap Map<String, Object> params);
 
     @Multipart
     @POST
     Call<String> upload(@Url String url, @Part MultipartBody.Part file);
+
+    @POST
+    Call<String> uploadParam(@Url String url, @Body MultipartBody multipartBody);
 }

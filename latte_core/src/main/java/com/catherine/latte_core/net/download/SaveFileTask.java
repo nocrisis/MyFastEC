@@ -46,7 +46,7 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
             //以文件类型大写做前缀
             return FileUtil.writeToDisk(is, downloadDir, extension.toUpperCase(), extension);
         } else {
-            return FileUtil.writeToDisk(is, downloadDir, name);
+            return FileUtil.writeToDisk(is, downloadDir, name, extension);
         }
     }
 
