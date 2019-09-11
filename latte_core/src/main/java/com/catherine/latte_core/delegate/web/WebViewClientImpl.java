@@ -3,15 +3,18 @@ package com.catherine.latte_core.delegate.web;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.catherine.latte_core.app.ConfigKeys;
 import com.catherine.latte_core.app.Latte;
 import com.catherine.latte_core.delegate.IPageLoaderListener;
 import com.catherine.latte_core.ui.LatteLoader;
 import com.catherine.latte_core.util.log.LatteLogger;
+import com.catherine.latte_core.util.storage.LattePreference;
 
 public class WebViewClientImpl extends WebViewClient {
     private final WebDelegate DELEGATE;
@@ -54,11 +57,26 @@ public class WebViewClientImpl extends WebViewClient {
                 LatteLogger.d("onReceiveValue " + s);
             }
         });
+        syncCookie();
         HANDLER.postDelayed(new Runnable() {
             @Override
             public void run() {
                 LatteLoader.stopLoading();
             }
         }, 1000);
+    }
+//同步cookie
+    private void syncCookie() {
+        final CookieManager manager = CookieManager.getInstance();
+        //这里的cookie和api请求的cookie是不一样的，这个在网页不可见
+        final String webHost = Latte.getConfiguration(ConfigKeys.WEB_HOST);
+        if (webHost != null) {
+            if (manager.hasCookies()) {
+                final String cookieStr = manager.getCookie(webHost);
+                if (cookieStr != null && !cookieStr.equals("")) {
+                    LattePreference.addCustomAppProfile("cookie",cookieStr);
+                }
+            }
+        }
     }
 }

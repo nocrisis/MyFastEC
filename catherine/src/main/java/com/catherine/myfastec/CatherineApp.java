@@ -6,6 +6,7 @@ import androidx.multidex.MultiDex;
 
 import com.catherine.latte_core.app.Latte;
 import com.catherine.latte_core.delegate.web.event.TestEvent;
+import com.catherine.latte_core.net.rx.AddCookieInterceptor;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import dao.DaoManager;
@@ -25,7 +26,10 @@ public class CatherineApp extends Application {
                 /*.withAppId("")
                 .withAppSecret("")*/
                 .withJSInterface("latte")//js调用java的名称
-                .withWebEvent("test",new TestEvent())
+                .withWebEvent("test", new TestEvent())
+                //添加cookies原生拦截器
+                .withInterceptor(new AddCookieInterceptor())
+                .withWebHost("https://www.baidu.com")
                 .configure();
         DaoManager.getInstance().init(this);
         //initStetho();翻不了墙

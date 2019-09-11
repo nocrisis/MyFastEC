@@ -50,6 +50,12 @@ public class Configurator {
     public final Configurator withApiHost(String host) {
         LATTE_CONFIGS.put(ConfigKeys.API_HOST, host);
         return this;
+
+    }
+    //浏览器加载的
+    public final Configurator withWebHost(String host) {
+        LATTE_CONFIGS.put(ConfigKeys.WEB_HOST, host);
+        return this;
     }
 
     public final Configurator withActivity(Activity activity) {

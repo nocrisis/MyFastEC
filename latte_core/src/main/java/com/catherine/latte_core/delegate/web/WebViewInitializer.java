@@ -1,14 +1,24 @@
 package com.catherine.latte_core.delegate.web;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 
 public class WebViewInitializer {
     @SuppressLint("SetJavaScriptEnabled")
     public WebView createWebView(WebView webView) {
+
         webView.setWebContentsDebuggingEnabled(true);
+        final CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookieManager.setAcceptThirdPartyCookies(webView,true);
+        }
+        CookieManager.setAcceptFileSchemeCookies(true);
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
         webView.setDrawingCacheEnabled(true);
