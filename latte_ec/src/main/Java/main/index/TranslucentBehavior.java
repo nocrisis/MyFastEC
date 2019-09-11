@@ -14,10 +14,6 @@ import com.catherine.latte.ec.R;
 import com.catherine.latte_core.ui.recycler.RgbValue;
 
 
-/**
- * Created by 傅令杰
- */
-
 @SuppressWarnings("unused")
 public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
 

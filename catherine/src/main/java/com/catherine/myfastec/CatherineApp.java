@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.multidex.MultiDex;
 
 import com.catherine.latte_core.app.Latte;
+import com.catherine.latte_core.delegate.web.event.TestEvent;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import dao.DaoManager;
@@ -23,6 +24,8 @@ public class CatherineApp extends Application {
 //                .withInterceptor(new DebugInterceptor("index",R.raw.test_json))
                 /*.withAppId("")
                 .withAppSecret("")*/
+                .withJSInterface("latte")//js调用java的名称
+                .withWebEvent("test",new TestEvent())
                 .configure();
         DaoManager.getInstance().init(this);
         //initStetho();翻不了墙

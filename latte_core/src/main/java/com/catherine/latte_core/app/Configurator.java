@@ -3,6 +3,10 @@ package com.catherine.latte_core.app;
 import android.app.Activity;
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
+
+import com.catherine.latte_core.delegate.web.event.Event;
+import com.catherine.latte_core.delegate.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -53,6 +57,16 @@ public class Configurator {
         return this;
     }
 
+    public Configurator withJSInterface(@NonNull String name) {
+        LATTE_CONFIGS.put(ConfigKeys.JS_INTERFACE, name);
+        return this;
+    }
+
+    public Configurator withWebEvent(@NonNull String name,@NonNull Event event) {
+        final EventManager manager = EventManager.getInstance();
+        manager.addEvent(name, event);
+        return this;
+    }
     public final Configurator withAppId(String appId) {
         LATTE_CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID, appId);
         return this;

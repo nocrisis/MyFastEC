@@ -58,7 +58,6 @@ public class SignInDelegate extends LatteDelegate {
                     SignHandler.onSignIn(response,mISignListener);
                 }
             }).build().post();
-            Toast.makeText(getContext(), "验证通过", Toast.LENGTH_LONG).show();
         }
     }
 
